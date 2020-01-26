@@ -1,68 +1,81 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Advanced Components and Storybook
 
-## Available Scripts
+- Storybook
+- MAYBE: Styling w/ classnames module
+- useEffect for having effects happen after actions (e.g. a little effect after liking a post)
+- useEffect for loading spinner
 
-In the project directory, you can run:
+This week we're kicking off a new project!
 
-### `npm start`
+We'll be building a Pinterest-inspired React app, which we'll eventually connect to an Express backend. The task that we'll take on this week is to create some independent components that will eventually be used in the full application.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## What is the project?
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Storybook
 
-### `npm test`
+In a fresh `create-react-app` project:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+npx -p @storybook/cli sb init
+npm run storybook
+```
 
-### `npm run build`
+Then visit `http://localhost:9009`.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You have a choice for where you store your stories. You can store them in the auto-generated `stories` folder, or you can make stories alongside your components. [Storybook recommends storing them alongside your components.](https://storybook.js.org/docs/basics/writing-stories/)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## List of Components for Today
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Card w/ diff states
+    - start off with default card
+    - liked/unliked
+    - w/ long description ('read more')
+    - diff size images
+- Search component
+- Navbar
 
-### `npm run eject`
+## Third Party Component Libraries
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We've already worked with creating our own components in the past few lessons. If we wanted to, we could create the "Card" component by working off of the design, but this would likely be a lot of work! Often, web developers will leverage open-source component libraries to build their UIs quickly. These component libraries may have components that make dealing with forms, menus, layouts, etc. a lot simpler. Many of these libraries may come 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+We'll be using [Gestalt](https://github.com/pinterest/gestalt), a component library by Pinterest. There are many other component libraries (Ant Design Pro, Reactstrap, Material-UI, Semantic React etc.), and they're all great! They generally have very similar components with slightly different styles and available props, but ultimately they serve very similar purposes. You may find it helpful to explore multiple component libraries to familiarize yourself with the various options out there.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+npm i gestalt
+```
 
-## Learn More
+Include the CSS in `src/index.js`. For our stories, we'll have to include the CSS in each story file.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```js
+import 'gestalt/dist/gestalt.css';
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Pin Component
 
-### Code Splitting
+Gestalt has a "Card" component which will be useful for us as we create the component for our Pins. [Take a look at the documentation for the Card component.](https://pinterest.github.io/gestalt/#/Card) The props are outlined at the top. We'll likely find the `onMouseEnter` and `onMouseLeave` props useful!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- make the revealable info
+- add state for "favourite", toggle on heart click
 
-### Analyzing the Bundle Size
+- Make stories for what the component looks like w/o Title and Author, w/ Title but no Author, w/ both Title and Author
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+STRETCH:
 
-### Making a Progressive Web App
+- What does the pin look like when it's NOT part of a collection?
+- What about when it IS part of a collection?
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Masonry
 
-### Advanced Configuration
+- make story for what it looks like with a list of pins and with an empty list
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Search Bar
 
-### Deployment
+- Sometimes
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Nav Bar
 
-### `npm run build` fails to minify
+### Collection Thumbnail
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+When we view the list of collections, each collection has a little mosaic, a title, and a description
