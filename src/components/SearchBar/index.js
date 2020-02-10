@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import useDebounce from '../../hooks/useDebounce'
 import { Box, SearchField } from 'gestalt'
-
 
 export default ({ onChange }) => {
     const [search, setSearch] = useState("")
 
-    useEffect(() => {
+    useDebounce(() => {
         onChange(search)
-    }, [search])
+    }, search, 500)
 
     return (
         <Box paddingX={2}>

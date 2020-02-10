@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     dispatch({
       type: 'SET_FILTERED',
-      payload: pins.filter(pin => pin.title.includes(search) || pin.author.includes(search))
+      payload: pins.filter(pin => pin.title.toLowerCase().includes(search) || pin.author.toLowerCase().includes(search))
     })
   }, [pins, search])
 
