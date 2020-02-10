@@ -6,7 +6,9 @@ import sampleData from './components/PinMasonry/sample_data.json'
 
 function App() {
   const [pins, setPins] = useState([])
+  const [filteredPins, setFilteredPins] = useState([])
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     const fetchData = () => {
@@ -20,11 +22,17 @@ function App() {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    setFilteredPins(
+      pins.filter(pin => pin.title.includes(search) || pin.author.includes(search))
+    )
+  }, [pins, search])
+
   return (
     <div className={"container"}>
-      <SearchBar />
+      <SearchBar onChange={setSearch} />
       {
-        loading ? <h1>Loading...</h1> : <PinMasonry pins={pins} />
+        loading ? <h1>Loading...</h1> : <PinMasonry pins={filteredPins} />
       }
     </div>
   );
